@@ -44,6 +44,9 @@
     },
     computed: {
       filteredDataArray() {
+        if(typeof this.allManufacturers == 'undefined'){
+          return []
+        }
         return this.allManufacturers.filter((option) => {
           return option.name
             .toString()
