@@ -3,9 +3,12 @@ const { resolve } = require('path')
 require('dotenv').config()
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
   // rootDir: resolve(__dirname, '../..'),
-  // srcDir: __dirname,
+
+  generate:{
+    fallback: true
+  },
   /*
   ** Headers of the page
   */
@@ -36,8 +39,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: ['~plugins/buefy'],
 
   /*
   ** Nuxt.js modules
@@ -45,11 +47,17 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     // '@nuxtjs/axios',
+    'nuxt-buefy',
+    '@nuxtjs/dotenv',
     '@nuxtjs/apollo'
   ],
   /*
   ** Axios module configuration
   */
+  env: {
+    HTTP_ENDPOINT: process.env.HTTP_ENDPOINT || '',
+    DATO_ACCESS_TOKEN: process.env.DATO_ACCESS_TOKEN || '',
+  },
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
@@ -58,7 +66,7 @@ module.exports = {
       console.log('%cError', 'background: red; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold;', error.message)
     },
     clientConfigs: {
-      default: "~/plugins/apollo-config.js"
+      default: '~/graphql/apollo/defaultClient.js'
     }
   },
 
@@ -70,7 +78,6 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-
     }
   }
 }
