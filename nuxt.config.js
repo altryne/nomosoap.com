@@ -54,6 +54,10 @@ module.exports = {
   /*
   ** Axios module configuration
   */
+  env: {
+    HTTP_ENDPOINT: process.env.HTTP_ENDPOINT || '',
+    DATO_ACCESS_TOKEN: process.env.DATO_ACCESS_TOKEN || '',
+  },
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
@@ -62,7 +66,7 @@ module.exports = {
       console.log('%cError', 'background: red; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold;', error.message)
     },
     clientConfigs: {
-      default: '~/plugins/apollo-config.js'
+      default: '~/graphql/apollo/defaultClient.js'
     }
   },
 
