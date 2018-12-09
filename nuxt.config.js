@@ -1,8 +1,11 @@
 const pkg = require('./package')
+const { resolve } = require('path')
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
-
+  // rootDir: resolve(__dirname, '../..'),
+  // srcDir: __dirname,
   /*
   ** Headers of the page
   */
@@ -41,13 +44,22 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    // '@nuxtjs/axios',
+    '@nuxtjs/apollo'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+  apollo: {
+    errorHandler (error) {
+      console.log('%cError', 'background: red; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold;', error.message)
+    },
+    clientConfigs: {
+      default: "~/plugins/apollo-config.js"
+    }
   },
 
   /*
@@ -58,7 +70,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+
     }
   }
 }
