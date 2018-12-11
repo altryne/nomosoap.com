@@ -1,0 +1,24 @@
+{
+  allPages{
+    id,
+    slug,
+    title
+    body
+  },
+  allManufacturers{
+    id
+    name,
+    settingName,
+    links{
+      linkName,
+      linkHref
+    },
+    steps{
+      id,
+      stepDescription
+    },
+    youtubeSettingsLink{
+      url
+    }
+  }
+}

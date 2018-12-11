@@ -1,9 +1,10 @@
 <template>
-  <section class="bg-blue-lightest h-full py-8 header-hero">
+  <section class="bg-blue-lightest h-full py-8 header-hero" >
     <div class="w-5/6 max-w-xlg ml-auto mr-auto h-full">
       <div class="flex items-center justify-center text-center h-full">
         <div>
-          <h1 class="text-3xl sm:text-4xl font-semibold leading-none tracking-tight mb-4">Search for your TV below to find out how to turn off motion smoothing</h1>
+
+          <h1 class="text-3xl sm:text-4xl font-normal leading-none tracking-tight mb-4">Search for your TV below to find out how to turn off motion smoothing</h1>
           <h2 class="text-2xl sm:text-3xl text-blue-darker opacity-75 font-normal leading-tight mb-8"> A.K.A the Soap Opera effect</h2>
           <div class="flex flex-col sm:flex-row items-center justify-center sm:pt-3 mb-3 sm:mb-6">
             <Search></Search>
@@ -21,7 +22,7 @@
     </div>
 
     <ul>
-      <li v-for="page in allPages" >
+      <li v-for="page in apollo_data.allPages" >
 
         <nuxt-link :to="`pages/${page.slug}`">
           {{ page.title }}
@@ -72,13 +73,21 @@
 </template>
 
 <script>
-  import gql from 'graphql-tag'
   import Search from '../components/Search'
+  import { mapState } from 'Vuex'
 
   export default {
     components: {
       Search,
-      // VueMarkdown
+    },
+    computed: {
+        ...mapState([
+          'apollo_data',
+          'counter'
+        ]),
+    },
+    methods:{
+
     },
     data () {
       return {
@@ -86,15 +95,7 @@
         page: '',
       }
     },
-    apollo: {
-      allPages: gql`{
-        allPages{
-          id,
-          title,
-          slug
-        }
-      }`,
-    },
+
 
   }
 </script>
@@ -116,25 +117,4 @@
     text-align: center;
   }
 
-  .title {
-    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    display: block;
-    font-weight: 300;
-    font-size: 100px;
-    color: #35495E;
-    letter-spacing: 1px;
-  }
-
-  .subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-  }
-
-  .links {
-    padding-top: 15px;
-  }
 </style>
