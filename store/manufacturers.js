@@ -18,7 +18,6 @@ export const actions = {
           }
         }
       `).then(function({data}){
-        debugger
         this.state.manufacturers = data.allPages
       })
     }

@@ -31,7 +31,6 @@
     },
     methods: {
       onSelect(selected){
-        debugger
         return this.$router.push(`/guides/${selected.id}`)
       }
     },
