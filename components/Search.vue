@@ -19,23 +19,15 @@
 </template>
 
 <script>
-  import gql from 'graphql-tag'
+  import { mapState } from 'vuex'
+
   export default {
     data() {
       return {
-        allManufacturers: [
-        ],
+
         name: '',
         selected: null
       }
-    },
-    apollo:{
-      allManufacturers: gql`query{
-        allManufacturers{
-          id,
-          name,
-        }
-      }`
     },
     methods: {
       onSelect(selected){
@@ -43,11 +35,14 @@
       }
     },
     computed: {
+      ...mapState([
+        'apollo_data'
+      ]),
       filteredDataArray() {
-        if(typeof this.allManufacturers == 'undefined'){
+        if(typeof this.apollo_data.allManufacturers == 'undefined'){
           return []
         }
-        return this.allManufacturers.filter((option) => {
+        return this.apollo_data.allManufacturers.filter((option) => {
           return option.name
             .toString()
             .toLowerCase()
